@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>{{ plant.vernacularName or plant.scientificName }}</h1>
+  <p><em>{{ plant.scientificName }}</em></p>
+  <p>Weed Scale: {{ plant.weedScale }}, Findability: {{ plant.findability }}</p>
+  <p>Habitat: {{ plant.habitatNotes }}</p>
+
+  <h3 class="mt-4">Occurrences ({{ plant.occurrences|length }})</h3>
+  <div class="row">
+    {% for occ in plant.occurrences %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          {% if occ.images %}
+            <img src="{{ occ.images[0] }}" class="card-img-top" alt=""> 
+          {% endif %}
+          <div class="card-body">
+            <p class="card-text">Date: {{ occ.eventDate }}</p>
+            <p class="card-text">Location: {{ occ.lat }}, {{ occ.lon }}</p>
+            <a href="https://www.openstreetmap.org/?mlat={{ occ.lat }}&mlon={{ occ.lon }}#map=12/{{ occ.lat }}/{{ occ.lon }}" target="_blank" class="btn btn-sm btn-outline-primary">Map</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

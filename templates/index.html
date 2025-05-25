@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 class="mb-4">Species List</h1>
+  <div class="list-group">
+    {% for plant in plants %}
+      <a href="{{ plant.slug }}.html" class="list-group-item list-group-item-action">
+        <strong>{{ plant.vernacularName or plant.scientificName }}</strong> &mdash; {{ plant.scientificName }}
+      </a>
+    {% endfor %}
+  </div>
+{% endblock %}
