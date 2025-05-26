@@ -3,8 +3,92 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Plant Occurrences</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    >
+    <style>
+      /* Grid layout for plant cards */
+      .plant-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+      .plant-item {
+        display: flex;
+        align-items: center;
+        width: calc(33.333% - 1rem);
+        padding: 0.75rem;
+        background: #fff;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .plant-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      }
+      .plant-thumb {
+        width: 64px;
+        height: 64px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        margin-right: 1rem;
+        flex-shrink: 0;
+      }
+
+      /* Slider card styling */
+      .slider-card {
+        background: #fff;
+        padding: 1rem 1.25rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        margin-bottom: 1.5rem;
+        max-width: 400px;
+      }
+      .slider-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+      /* Custom fill on the track */
+      #desperation-slider::-webkit-slider-runnable-track {
+        height: 6px;
+        background: linear-gradient(
+          to right,
+          #28a745 0%,
+          #28a745 var(--slider-percent),
+          #ddd var(--slider-percent),
+          #ddd 100%
+        );
+        border-radius: 3px;
+      }
+      #desperation-slider {
+        width: 100%;
+        height: 24px;
+        background: transparent;
+        -webkit-appearance: none;
+      }
+      #desperation-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #28a745;
+        margin-top: -5px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      #desperation-slider::-webkit-slider-thumb:hover {
+        background: #218838;
+      }
+    </style>
   </head>
   <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
@@ -12,364 +96,290 @@
         <a class="navbar-brand" href="index.html">Plant Occurrences</a>
       </div>
     </nav>
+
     <div class="container">
-      
-  <h1 class="mb-4">Species List</h1>
-  <div class="list-group">
-    
-      <a href="almindelig-bulmeurt.html" class="list-group-item list-group-item-action">
-        <strong>Almindelig bulmeurt</strong> &mdash; Hyoscyamus niger L.
-      </a>
-    
-      <a href="almindelig-gyvel.html" class="list-group-item list-group-item-action">
-        <strong>Almindelig gyvel</strong> &mdash; Cytisus scoparius (L.) Link
-      </a>
-    
-      <a href="almindelig-humle.html" class="list-group-item list-group-item-action">
-        <strong>Almindelig humle</strong> &mdash; Humulus lupulus L.
-      </a>
-    
-      <a href="almindelig-kanariegr-s.html" class="list-group-item list-group-item-action">
-        <strong>Almindelig kanariegræs</strong> &mdash; Phalaris canariensis L.
-      </a>
-    
-      <a href="almindelig-katteurt.html" class="list-group-item list-group-item-action">
-        <strong>Almindelig katteurt</strong> &mdash; Nepeta cataria L.
-      </a>
-    
-      <a href="ananas-salvie.html" class="list-group-item list-group-item-action">
-        <strong>Ananas-salvie</strong> &mdash; Salvia elegans Vahl
-      </a>
-    
-      <a href="bl-fodet-sk-rhat.html" class="list-group-item list-group-item-action">
-        <strong>Blåfodet skørhat</strong> &mdash; Pluteus cyanopus Quel.
-      </a>
-    
-      <a href="bl-gr-n-tr-vlhat.html" class="list-group-item list-group-item-action">
-        <strong>Blågrøn trøvlhat</strong> &mdash; Inocybe haemacta (Berk. & Cooke) Sacc.
-      </a>
-    
-      <a href="bl-nende-n-genhat.html" class="list-group-item list-group-item-action">
-        <strong>Blånende nøgenhat</strong> &mdash; Psilocybe cyanescens Wakef.
-      </a>
-    
-      <a href="bonde-tobak.html" class="list-group-item list-group-item-action">
-        <strong>Bonde-tobak</strong> &mdash; Nicotiana rustica L.
-      </a>
-    
-      <a href="br-nden-lde.html" class="list-group-item list-group-item-action">
-        <strong>Brændenælde</strong> &mdash; Urtica dioica L.
-      </a>
-    
-      <a href="citronmelisse.html" class="list-group-item list-group-item-action">
-        <strong>Citronmelisse</strong> &mdash; Melissa officinalis L.
-      </a>
-    
-      <a href="engleblomme.html" class="list-group-item list-group-item-action">
-        <strong>Engleblomme</strong> &mdash; Datura ferox L.
-      </a>
-    
-      <a href="ephedra-distachya.html" class="list-group-item list-group-item-action">
-        <strong>Ephedra distachya</strong> &mdash; Ephedra distachya L.
-      </a>
-    
-      <a href="gifturt.html" class="list-group-item list-group-item-action">
-        <strong>Gifturt</strong> &mdash; Conium maculatum L.
-      </a>
-    
-      <a href="gr-bynke.html" class="list-group-item list-group-item-action">
-        <strong>Gråbynke</strong> &mdash; Artemisia vulgaris L.
-      </a>
-    
-      <a href="gr-nspuklet-tr-vlhat.html" class="list-group-item list-group-item-action">
-        <strong>Grønspuklet trøvlhat</strong> &mdash; Inocybe corydalina Quel.
-      </a>
-    
-      <a href="gul-kande.html" class="list-group-item list-group-item-action">
-        <strong>Gul åkande</strong> &mdash; Nuphar lutea (L.) Sm.
-      </a>
-    
-      <a href="hamp.html" class="list-group-item list-group-item-action">
-        <strong>Hamp</strong> &mdash; Cannabis sativa L.
-      </a>
-    
-      <a href="have-malurt.html" class="list-group-item list-group-item-action">
-        <strong>Have-malurt</strong> &mdash; Artemisia absinthium L.
-      </a>
-    
-      <a href="hermelrude.html" class="list-group-item list-group-item-action">
-        <strong>Hermelrude</strong> &mdash; Peganum harmala L.
-      </a>
-    
-      <a href="hjertetr-st.html" class="list-group-item list-group-item-action">
-        <strong>Hjertetrøst</strong> &mdash; Leonurus cardiaca L.
-      </a>
-    
-      <a href="hulrodet-l-rkespore.html" class="list-group-item list-group-item-action">
-        <strong>Hulrodet lærkespore</strong> &mdash; Corydalis cava (L.) Schweigg. & Korte
-      </a>
-    
-      <a href="hvid-kande.html" class="list-group-item list-group-item-action">
-        <strong>Hvid åkande</strong> &mdash; Nymphaea alba L.
-      </a>
-    
-      <a href="ipomoea-tricolor.html" class="list-group-item list-group-item-action">
-        <strong>Ipomoea tricolor</strong> &mdash; Ipomoea tricolor Cav.
-      </a>
-    
-      <a href="japansk-humle.html" class="list-group-item list-group-item-action">
-        <strong>Japansk humle</strong> &mdash; Humulus japonicus Siebold & Zucc.
-      </a>
-    
-      <a href="kalmus.html" class="list-group-item list-group-item-action">
-        <strong>Kalmus</strong> &mdash; Acorus calamus L.
-      </a>
-    
-      <a href="korn-valmue.html" class="list-group-item list-group-item-action">
-        <strong>Korn-valmue</strong> &mdash; Papaver rhoeas L.
-      </a>
-    
-      <a href="kortakset-kanariegr-s.html" class="list-group-item list-group-item-action">
-        <strong>Kortakset kanariegræs</strong> &mdash; Phalaris brachystachys Link
-      </a>
-    
-      <a href="langknoldet-kanariegr-s.html" class="list-group-item list-group-item-action">
-        <strong>Langknoldet kanariegræs</strong> &mdash; Phalaris aquatica L.
-      </a>
-    
-      <a href="langstilket-l-rkespore.html" class="list-group-item list-group-item-action">
-        <strong>Langstilket lærkespore</strong> &mdash; Corydalis solida (L.) Clairv.
-      </a>
-    
-      <a href="liden-glansfr.html" class="list-group-item list-group-item-action">
-        <strong>Liden glansfr</strong> &mdash; Phalaris minor Retz.
-      </a>
-    
-      <a href="lysstokket-glanshat.html" class="list-group-item list-group-item-action">
-        <strong>Lysstokket glanshat</strong> &mdash; Panaeolus olivaceus F.H. Müller
-      </a>
-    
-      <a href="l-ge-anjersanker.html" class="list-group-item list-group-item-action">
-        <strong>Læge-anjersanker</strong> &mdash; Agrimonia eupatoria L.
-      </a>
-    
-      <a href="l-ge-baldrian.html" class="list-group-item list-group-item-action">
-        <strong>Læge-baldrian</strong> &mdash; Valeriana officinalis L.
-      </a>
-    
-      <a href="markmynte.html" class="list-group-item list-group-item-action">
-        <strong>Markmynte</strong> &mdash; Mentha arvensis L.
-      </a>
-    
-      <a href="meldr-jer.html" class="list-group-item list-group-item-action">
-        <strong>Meldrøjer</strong> &mdash; Claviceps purpurea (Fr.) Tul.
-      </a>
-    
-      <a href="mexicansk-pigvalmue.html" class="list-group-item list-group-item-action">
-        <strong>Mexicansk pigvalmue</strong> &mdash; Argemone mexicana L.
-      </a>
-    
-      <a href="mose-skvalderk-l.html" class="list-group-item list-group-item-action">
-        <strong>Mose-skvalderkål</strong> &mdash; Scutellaria galericulata L.
-      </a>
-    
-      <a href="natskygge.html" class="list-group-item list-group-item-action">
-        <strong>Natskygge</strong> &mdash; Solanum dulcamara L.
-      </a>
-    
-      <a href="nattskat.html" class="list-group-item list-group-item-action">
-        <strong>Nattskat</strong> &mdash; Atropa belladonna L.
-      </a>
-    
-      <a href="okkergul-fluesvamp.html" class="list-group-item list-group-item-action">
-        <strong>Okkergul fluesvamp</strong> &mdash; Amanita gemmata (Fr.) Bertillon
-      </a>
-    
-      <a href="opium-valmue.html" class="list-group-item list-group-item-action">
-        <strong>Opium-valmue</strong> &mdash; Papaver somniferum L.
-      </a>
-    
-      <a href="panter-fluesvamp.html" class="list-group-item list-group-item-action">
-        <strong>Panter-fluesvamp</strong> &mdash; Amanita pantherina (DC.) Krombh.
-      </a>
-    
-      <a href="pig-ble.html" class="list-group-item list-group-item-action">
-        <strong>Pigæble</strong> &mdash; Datura stramonium L.
-      </a>
-    
-      <a href="prikbladet-perikon.html" class="list-group-item list-group-item-action">
-        <strong>Prikbladet perikon</strong> &mdash; Hypericum perforatum L.
-      </a>
-    
-      <a href="pr-gtig-n-genhat.html" class="list-group-item list-group-item-action">
-        <strong>Prægtig nøgenhat</strong> &mdash; Psilocybe fimetaria (P.D. Orton) Watling
-      </a>
-    
-      <a href="randblomstret-glanshat.html" class="list-group-item list-group-item-action">
-        <strong>Randblomstret glanshat</strong> &mdash; Panaeolus cinctulus (Bolton) Britzelm.
-      </a>
-    
-      <a href="rude.html" class="list-group-item list-group-item-action">
-        <strong>Rude</strong> &mdash; Ruta graveolens L.
-      </a>
-    
-      <a href="r-d-fluesvamp.html" class="list-group-item list-group-item-action">
-        <strong>Rød fluesvamp</strong> &mdash; Amanita muscaria (L.) Hook.
-      </a>
-    
-      <a href="r-llike.html" class="list-group-item list-group-item-action">
-        <strong>Røllike</strong> &mdash; Achillea millefolium L.
-      </a>
-    
-      <a href="sandlobelia.html" class="list-group-item list-group-item-action">
-        <strong>Sandlobelia</strong> &mdash; Tanacetum vulgare L.
-      </a>
-    
-      <a href="sibirisk-hjertespand.html" class="list-group-item list-group-item-action">
-        <strong>Sibirisk hjertespand</strong> &mdash; Leonurus sibiricus L.
-      </a>
-    
-      <a href="skarleje.html" class="list-group-item list-group-item-action">
-        <strong>Skarleje</strong> &mdash; Salvia sclarea L.
-      </a>
-    
-      <a href="slimb-ger-n-genhat.html" class="list-group-item list-group-item-action">
-        <strong>Slimbæger-nøgenhat</strong> &mdash; Psilocybe liniformans Guzman & Bas
-      </a>
-    
-      <a href="spids-n-genhat.html" class="list-group-item list-group-item-action">
-        <strong>Spids nøgenhat</strong> &mdash; Panaeolus semilanceatus (Fr.) P. Kumm.
-      </a>
-    
-      <a href="spids-n-genhat.html" class="list-group-item list-group-item-action">
-        <strong>Spids nøgenhat</strong> &mdash; Psilocybe semilanceata (Fr.) P. Kumm.
-      </a>
-    
-      <a href="stak-glansfr.html" class="list-group-item list-group-item-action">
-        <strong>Stak-glansfr</strong> &mdash; Phalaris paradoxa L.
-      </a>
-    
-      <a href="stiv-sk-rhat.html" class="list-group-item list-group-item-action">
-        <strong>Stiv skørhat</strong> &mdash; Pluteus salicinus (Pers.) P. Kumm.
-      </a>
-    
-      <a href="stor-jernurt.html" class="list-group-item list-group-item-action">
-        <strong>Stor jernurt</strong> &mdash; Chelidonium majus L.
-      </a>
-    
-      <a href="tagr-r.html" class="list-group-item list-group-item-action">
-        <strong>Tagrør</strong> &mdash; Phragmites australis (Cav.) Trin. ex Steud.
-      </a>
-    
-      <a href="tidlig-glanshat.html" class="list-group-item list-group-item-action">
-        <strong>Tidlig glanshat</strong> &mdash; Panaeolus fimicola (Pers.) Gillet
-      </a>
-    
-      <a href="vellugtende-kamille.html" class="list-group-item list-group-item-action">
-        <strong>Vellugtende kamille</strong> &mdash; Matricaria chamomilla L.
-      </a>
-    
-      <a href="vild-salat.html" class="list-group-item list-group-item-action">
-        <strong>Vild salat</strong> &mdash; Lactuca virosa L.
-      </a>
-    
-      <a href="virginsk-tobak.html" class="list-group-item list-group-item-action">
-        <strong>Virginsk tobak</strong> &mdash; Nicotiana tabacum L.
-      </a>
-    
-  </div>
+      <h1 class="mb-4">Species List</h1>
+
+      <!-- Slider UI -->
+      <div class="slider-card">
+        <label for="desperation-slider" class="slider-label">
+          Desperation Factor: <span id="desperation-value">0.00</span>
+        </label>
+        <input
+          type="range"
+          id="desperation-slider"
+          min="0"
+          max="1"
+          step="0.01"
+          value="0"
+        >
+      </div>
+
+            <!-- Plant grid -->
+      <ul class="plant-list">
+        <li><a href="almindelig-bulmeurt.html" class="plant-item">
+          <strong>Almindelig bulmeurt</strong> — Hyoscyamus niger L.
+        </a></li>
+        <li><a href="almindelig-gyvel.html" class="plant-item">
+          <strong>Almindelig gyvel</strong> — Cytisus scoparius (L.) Link
+        </a></li>
+        <li><a href="almindelig-humle.html" class="plant-item">
+          <strong>Almindelig humle</strong> — Humulus lupulus L.
+        </a></li>
+        <li><a href="almindelig-kanariegr-s.html" class="plant-item">
+          <strong>Almindelig kanariegræs</strong> — Phalaris canariensis L.
+        </a></li>
+        <li><a href="almindelig-katteurt.html" class="plant-item">
+          <strong>Almindelig katteurt</strong> — Nepeta cataria L.
+        </a></li>
+        <li><a href="ananas-salvie.html" class="plant-item">
+          <strong>Ananas-salvie</strong> — Salvia elegans Vahl
+        </a></li>
+        <li><a href="bl-fodet-sk-rhat.html" class="plant-item">
+          <strong>Blåfodet skørhat</strong> — Pluteus cyanopus Quel.
+        </a></li>
+        <li><a href="bl-gr-n-tr-vlhat.html" class="plant-item">
+          <strong>Blågrøn trøvlhat</strong> — Inocybe haemacta (Berk. & Cooke) Sacc.
+        </a></li>
+        <li><a href="bl-nende-n-genhat.html" class="plant-item">
+          <strong>Blånende nøgenhat</strong> — Psilocybe cyanescens Wakef.
+        </a></li>
+        <li><a href="bonde-tobak.html" class="plant-item">
+          <strong>Bonde-tobak</strong> — Nicotiana rustica L.
+        </a></li>
+        <li><a href="br-nden-lde.html" class="plant-item">
+          <strong>Brændenælde</strong> — Urtica dioica L.
+        </a></li>
+        <li><a href="citronmelisse.html" class="plant-item">
+          <strong>Citronmelisse</strong> — Melissa officinalis L.
+        </a></li>
+        <li><a href="engleblomme.html" class="plant-item">
+          <strong>Engleblomme</strong> — Datura ferox L.
+        </a></li>
+        <li><a href="ephedra-distachya.html" class="plant-item">
+          <strong>Ephedra distachya</strong> — Ephedra distachya L.
+        </a></li>
+        <li><a href="gifturt.html" class="plant-item">
+          <strong>Gifturt</strong> — Conium maculatum L.
+        </a></li>
+        <li><a href="gr-bynke.html" class="plant-item">
+          <strong>Gråbynke</strong> — Artemisia vulgaris L.
+        </a></li>
+        <li><a href="gr-nspuklet-tr-vlhat.html" class="plant-item">
+          <strong>Grønspuklet trøvlhat</strong> — Inocybe corydalina Quel.
+        </a></li>
+        <li><a href="gul-kande.html" class="plant-item">
+          <strong>Gul åkande</strong> — Nuphar lutea (L.) Sm.
+        </a></li>
+        <li><a href="hamp.html" class="plant-item">
+          <strong>Hamp</strong> — Cannabis sativa L.
+        </a></li>
+        <li><a href="have-malurt.html" class="plant-item">
+          <strong>Have-malurt</strong> — Artemisia absinthium L.
+        </a></li>
+        <li><a href="hermelrude.html" class="plant-item">
+          <strong>Hermelrude</strong> — Peganum harmala L.
+        </a></li>
+        <li><a href="hjertetr-st.html" class="plant-item">
+          <strong>Hjertetrøst</strong> — Leonurus cardiaca L.
+        </a></li>
+        <li><a href="hulrodet-l-rkespore.html" class="plant-item">
+          <strong>Hulrodet lærkespore</strong> — Corydalis cava (L.) Schweigg. & Korte
+        </a></li>
+        <li><a href="hvid-kande.html" class="plant-item">
+          <strong>Hvid åkande</strong> — Nymphaea alba L.
+        </a></li>
+        <li><a href="ipomoea-tricolor.html" class="plant-item">
+          <strong>Ipomoea tricolor</strong> — Ipomoea tricolor Cav.
+        </a></li>
+        <li><a href="japansk-humle.html" class="plant-item">
+          <strong>Japansk humle</strong> — Humulus japonicus Siebold & Zucc.
+        </a></li>
+        <li><a href="kalmus.html" class="plant-item">
+          <strong>Kalmus</strong> — Acorus calamus L.
+        </a></li>
+        <li><a href="korn-valmue.html" class="plant-item">
+          <strong>Korn-valmue</strong> — Papaver rhoeas L.
+        </a></li>
+        <li><a href="kortakset-kanariegr-s.html" class="plant-item">
+          <strong>Kortakset kanariegræs</strong> — Phalaris brachystachys Link
+        </a></li>
+        <li><a href="langknoldet-kanariegr-s.html" class="plant-item">
+          <strong>Langknoldet kanariegræs</strong> — Phalaris aquatica L.
+        </a></li>
+        <li><a href="langstilket-l-rkespore.html" class="plant-item">
+          <strong>Langstilket lærkespore</strong> — Corydalis solida (L.) Clairv.
+        </a></li>
+        <li><a href="liden-glansfr.html" class="plant-item">
+          <strong>Liden glansfr</strong> — Phalaris minor Retz.
+        </a></li>
+        <li><a href="lysstokket-glanshat.html" class="plant-item">
+          <strong>Lysstokket glanshat</strong> — Panaeolus olivaceus F.H. Müller
+        </a></li>
+        <li><a href="l-ge-anjersanker.html" class="plant-item">
+          <strong>Læge-anjersanker</strong> — Agrimonia eupatoria L.
+        </a></li>
+        <li><a href="l-ge-baldrian.html" class="plant-item">
+          <strong>Læge-baldrian</strong> — Valeriana officinalis L.
+        </a></li>
+        <li><a href="markmynte.html" class="plant-item">
+          <strong>Markmynte</strong> — Mentha arvensis L.
+        </a></li>
+        <li><a href="meldr-jer.html" class="plant-item">
+          <strong>Meldrøjer</strong> — Claviceps purpurea (Fr.) Tul.
+        </a></li>
+        <li><a href="mexicansk-pigvalmue.html" class="plant-item">
+          <strong>Mexicansk pigvalmue</strong> — Argemone mexicana L.
+        </a></li>
+        <li><a href="mose-skvalderk-l.html" class="plant-item">
+          <strong>Mose-skvalderkål</strong> — Scutellaria galericulata L.
+        </a></li>
+        <li><a href="natskygge.html" class="plant-item">
+          <strong>Natskygge</strong> — Solanum dulcamara L.
+        </a></li>
+        <li><a href="nattskat.html" class="plant-item">
+          <strong>Nattskat</strong> — Atropa belladonna L.
+        </a></li>
+        <li><a href="okkergul-fluesvamp.html" class="plant-item">
+          <strong>Okkergul fluesvamp</strong> — Amanita gemmata (Fr.) Bertillon
+        </a></li>
+        <li><a href="opium-valmue.html" class="plant-item">
+          <strong>Opium-valmue</strong> — Papaver somniferum L.
+        </a></li>
+        <li><a href="panter-fluesvamp.html" class="plant-item">
+          <strong>Panter-fluesvamp</strong> — Amanita pantherina (DC.) Krombh.
+        </a></li>
+        <li><a href="pig-ble.html" class="plant-item">
+          <strong>Pigæble</strong> — Datura stramonium L.
+        </a></li>
+        <li><a href="prikbladet-perikon.html" class="plant-item">
+          <strong>Prikbladet perikon</strong> — Hypericum perforatum L.
+        </a></li>
+        <li><a href="pr-gtig-n-genhat.html" class="plant-item">
+          <strong>Prægtig nøgenhat</strong> — Psilocybe fimetaria (P.D. Orton) Watling
+        </a></li>
+        <li><a href="randblomstret-glanshat.html" class="plant-item">
+          <strong>Randblomstret glanshat</strong> — Panaeolus cinctulus (Bolton) Britzelm.
+        </a></li>
+        <li><a href="rude.html" class="plant-item">
+          <strong>Rude</strong> — Ruta graveolens L.
+        </a></li>
+        <li><a href="r-d-fluesvamp.html" class="plant-item">
+          <strong>Rød fluesvamp</strong> — Amanita muscaria (L.) Hook.
+        </a></li>
+        <li><a href="r-llike.html" class="plant-item">
+          <strong>Røllike</strong> — Achillea millefolium L.
+        </a></li>
+        <li><a href="sandlobelia.html" class="plant-item">
+          <strong>Sandlobelia</strong> — Tanacetum vulgare L.
+        </a></li>
+        <li><a href="sibirisk-hjertespand.html" class="plant-item">
+          <strong>Sibirisk hjertespand</strong> — Leonurus sibiricus L.
+        </a></li>
+        <li><a href="skarleje.html" class="plant-item">
+          <strong>Skarleje</strong> — Salvia sclarea L.
+        </a></li>
+        <li><a href="slimb-ger-n-genhat.html" class="plant-item">
+          <strong>Slimbæger-nøgenhat</strong> — Psilocybe liniformans Guzman & Bas
+        </a></li>
+        <li><a href="spids-n-genhat.html" class="plant-item">
+          <strong>Spids nøgenhat</strong> — Psilocybe semilanceata (Fr.) P. Kumm.
+        </a></li>
+        <li><a href="stak-glansfr.html" class="plant-item">
+          <strong>Stak-glansfr</strong> — Phalaris paradoxa L.
+        </a></li>
+        <li><a href="stiv-sk-rhat.html" class="plant-item">
+          <strong>Stiv skørhat</strong> — Pluteus salicinus (Pers.) P. Kumm.
+        </a></li>
+        <li><a href="stor-jernurt.html" class="plant-item">
+          <strong>Stor jernurt</strong> — Chelidonium majus L.
+        </a></li>
+        <li><a href="tagr-r.html" class="plant-item">
+          <strong>Tagrør</strong> — Phragmites australis (Cav.) Trin. ex Steud.
+        </a></li>
+        <li><a href="tidlig-glanshat.html" class="plant-item">
+          <strong>Tidlig glanshat</strong> — Panaeolus fimicola (Pers.) Gillet
+        </a></li>
+        <li><a href="vellugtende-kamille.html" class="plant-item">
+          <strong>Vellugtende kamille</strong> — Matricaria chamomilla L.
+        </a></li>
+        <li><a href="vild-salat.html" class="plant-item">
+          <strong>Vild salat</strong> — Lactuca virosa L.
+        </a></li>
+        <li><a href="virginsk-tobak.html" class="plant-item">
+          <strong>Virginsk tobak</strong> — Nicotiana tabacum L.
+        </a></li>
+      </ul>
 
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-  <!-- … your existing index.html content … -->
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.list-group');
-    const items = Array.from(container.querySelectorAll('a.list-group-item'));
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const list = document.querySelector('.plant-list');
+        const entries = Array.from(list.querySelectorAll('a.plant-item'));
+        const slider = document.getElementById('desperation-slider');
+        const valueDisplay = document.getElementById('desperation-value');
 
-    // 1) Create slider UI
-    const sliderWrapper = document.createElement('div');
-    sliderWrapper.className = 'mb-4';
-    sliderWrapper.innerHTML = `
-      <label for="desperation-slider" class="form-label">
-        Desperation Factor: <span id="desperation-value">0.00</span>
-      </label>
-      <input type="range" class="form-range" min="0" max="1" step="0.01"
-             id="desperation-slider" value="0">
-    `;
-    const title = document.querySelector('h1');
-    title.parentNode.insertBefore(sliderWrapper, title.nextSibling);
+        // Build data objects
+        const plants = entries.map(el => ({
+          el,
+          url: el.href,
+          weed: 0,
+          find: 0,
+          img: null,
+          score: 0
+        }));
 
-    const slider = document.getElementById('desperation-slider');
-    const valueDisplay = document.getElementById('desperation-value');
-
-    // 2) Build data array, fetch each plant page
-    const plantData = items.map(item => ({
-      item,
-      url: item.getAttribute('href'),
-      weedScale: 0,
-      findability: 0,
-      imgUrl: null,
-      combined: 0
-    }));
-
-    Promise.all(plantData.map(pd =>
-      fetch(pd.url)
-        .then(r => r.text())
-        .then(html => {
-          const doc = new DOMParser().parseFromString(html, 'text/html');
-          // a) parse Weed Scale & Findability
-          const stats = Array.from(doc.querySelectorAll('p'))
-                            .find(el => /Weed Scale/.test(el.textContent));
-          if (stats) {
-            const m = stats.textContent.match(/Weed Scale:\s*([\d.]+)\s*,\s*Findability:\s*([\d.]+)/);
-            if (m) {
-              pd.weedScale   = parseFloat(m[1]);
-              pd.findability = parseFloat(m[2]);
+        // Fetch each page to extract stats + thumbnail
+        Promise.all(plants.map(p =>
+          fetch(p.url)
+            .then(r => r.text())
+            .then(html => {
+              const doc = new DOMParser().parseFromString(html, 'text/html');
+              const stats = [...doc.querySelectorAll('p')]
+                .find(x => /Weed Scale/.test(x.textContent));
+              const m = stats?.textContent.match(
+                /Weed Scale:\s*([\d.]+)\s*,\s*Findability:\s*([\d.]+)/
+              );
+              if (m) [p.weed, p.find] = [parseFloat(m[1]), parseFloat(m[2])];
+              const imgEl = doc.querySelector('.card-img-top');
+              if (imgEl) p.img = imgEl.src;
+            })
+        )).then(() => {
+          // Insert thumbnails
+          plants.forEach(p => {
+            if (p.img) {
+              const img = document.createElement('img');
+              img.src = p.img;
+              img.alt = p.el.querySelector('strong').textContent;
+              img.className = 'plant-thumb';
+              p.el.insertBefore(img, p.el.firstChild);
             }
+          });
+
+          // Sorting & render
+          function updateList(factor) {
+            plants.forEach(p => {
+              p.score = (1 - factor) * p.weed + factor * p.find;
+            });
+            plants.sort((a, b) => b.score - a.score);
+            plants.forEach(p => list.appendChild(p.el.parentNode));
           }
-          // b) grab first occurrence image
-          const imgEl = doc.querySelector('.card img.card-img-top');
-          if (imgEl) pd.imgUrl = imgEl.src;
-        })
-    )).then(() => {
-      // 3) inject images into list items
-      plantData.forEach(pd => {
-        if (pd.imgUrl) {
-          const thumb = document.createElement('img');
-          thumb.src = pd.imgUrl;
-          thumb.alt = pd.item.querySelector('strong').textContent;
-          thumb.style.cssText = 'width:50px; height:auto; object-fit:cover; margin-right:10px;';
-          thumb.className = 'rounded';
-          // prepend image before the <strong>
-          pd.item.insertBefore(thumb, pd.item.firstChild);
-        }
+
+          // Slider interaction
+          function onSlide() {
+            const f = parseFloat(slider.value);
+            valueDisplay.textContent = f.toFixed(2);
+            slider.style.setProperty('--slider-percent', `${f * 100}%`);
+            updateList(f);
+          }
+          slider.addEventListener('input', onSlide);
+
+          // Initial render
+          onSlide();
+        }).catch(console.error);
       });
-
-      // 4) sort & render function
-      function sortAndRender(factor) {
-        plantData.forEach(pd => {
-          pd.combined = (1 - factor) * pd.weedScale + factor * pd.findability;
-        });
-        plantData.sort((a, b) => b.combined - a.combined);
-        plantData.forEach(pd => container.appendChild(pd.item));
-      }
-
-      // 5) wire up slider
-      slider.addEventListener('input', () => {
-        const f = parseFloat(slider.value);
-        valueDisplay.textContent = f.toFixed(2);
-        sortAndRender(f);
-      });
-
-      // init
-      sortAndRender(0);
-    })
-    .catch(err => console.error('Error loading plant data:', err));
-  });
-  </script>
-
-
-</body>
+    </script>
+  </body>
 </html>
