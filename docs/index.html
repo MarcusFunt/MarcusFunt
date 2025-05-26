@@ -282,4 +282,74 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.list-group');
+    const items = Array.from(container.querySelectorAll('a.list-group-item'));
+
+    // 1) Create slider UI
+    const sliderWrapper = document.createElement('div');
+    sliderWrapper.className = 'mb-4';
+    sliderWrapper.innerHTML = `
+      <label for="desperation-slider" class="form-label">
+        Desperation Factor: <span id="desperation-value">0.00</span>
+      </label>
+      <input type="range" class="form-range" min="0" max="1" step="0.01"
+             id="desperation-slider" value="0">
+    `;
+    // Insert slider just below the <h1>
+    const title = document.querySelector('h1');
+    title.parentNode.insertBefore(sliderWrapper, title.nextSibling);
+
+    const slider = document.getElementById('desperation-slider');
+    const valueDisplay = document.getElementById('desperation-value');
+
+    // 2) Load weedScale & findability for each item
+    const plantData = items.map(item => ({
+      item,
+      url: item.getAttribute('href'),
+      weedScale: 0,
+      findability: 0,
+      combined: 0
+    }));
+
+    Promise.all(plantData.map(pd =>
+      fetch(pd.url)
+        .then(r => r.text())
+        .then(html => {
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+          const p = Array.from(doc.querySelectorAll('p'))
+                         .find(el => /Weed Scale/.test(el.textContent));
+          if (p) {
+            const m = p.textContent.match(/Weed Scale:\s*([\d.]+)\s*,\s*Findability:\s*([\d.]+)/);
+            if (m) {
+              pd.weedScale   = parseFloat(m[1]);
+              pd.findability = parseFloat(m[2]);
+            }
+          }
+        })
+    )).then(() => {
+      // 3) Define sort & render
+      function sortAndRender(factor) {
+        plantData.forEach(pd => {
+          pd.combined = (1 - factor) * pd.weedScale + factor * pd.findability;
+        });
+        plantData.sort((a, b) => b.combined - a.combined);
+        plantData.forEach(pd => container.appendChild(pd.item));
+      }
+
+      // 4) Wire slider
+      slider.addEventListener('input', () => {
+        const f = parseFloat(slider.value);
+        valueDisplay.textContent = f.toFixed(2);
+        sortAndRender(f);
+      });
+
+      // Initial display
+      sortAndRender(0);
+    })
+    .catch(err => console.error('Error loading plant data:', err));
+  });
+  </script>
+</body>
 </html>
